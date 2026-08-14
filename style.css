@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-/* EL CANDADO MAESTRO */
 html, body {
     width: 100vw;
     height: 100vh;
@@ -13,54 +12,29 @@ html, body {
     position: relative;
 }
 
-/* SISTEMA INTELIGENTE DE ESCALADO */
+/* SISTEMA INTELIGENTE GIGANTE */
 :root {
-    --book-w: 400px;
-    --book-h: 560px;
-    --font-factor: 1; 
-}
-
-@media (max-width: 950px) {
-    :root {
-        --book-w: 42vw;
-        --book-h: 60vw;
-        --font-factor: 0.75; 
-    }
+    --book-w: 420px;
+    --book-h: 600px;
+    --font-factor: 1.1; 
 }
 
 @media (max-width: 600px) {
     :root {
-        /* Ligeramente más grande para que luzca bien en celular */
-        --book-w: 55vw;
-        --book-h: 80vw;
-        --font-factor: 0.65; 
+        /* ¡MAGIA MÓVIL! Ocupa el 85% del celular */
+        --book-w: 85vw;
+        --book-h: 135vw;
+        --font-factor: 1.35; /* Textos más grandes y legibles */
     }
 }
 
 .book-container {
-    /* CENTRADO DEL SANTO GRIAL (Inmune a bugs 3D) */
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    top: 0; bottom: 0; left: 0; right: 0;
     margin: auto;
-    
     width: var(--book-w);
     height: var(--book-h);
     perspective: 2000px;
-}
-
-.book {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-.book.open {
-    transform: translateX(50%);
 }
 
 .page {
@@ -69,42 +43,29 @@ html, body {
     height: 100%;
     top: 0;
     left: 0;
-    transform-style: preserve-3d;
-    transform-origin: left center;
-    transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
-    pointer-events: none;
-}
-
-.page.active, .page.flipped {
-    pointer-events: auto;
-}
-
-.page.flipped {
-    transform: rotateY(-180deg);
-}
-
-/* Orden de capas para que los botones respondan */
-#p1 { z-index: 3; }
-#p2 { z-index: 2; }
-#p3 { z-index: 1; }
-
-.front, .back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    padding: calc(var(--book-w) * 0.12);
+    /* La magia: hace que la hoja desaparezca al girar para ver la de abajo */
+    backface-visibility: hidden; 
     background: #ffffff;
-    box-shadow: inset 4px 0 30px rgba(0,0,0,0.04), 5px 5px 20px rgba(0,0,0,0.06);
+    box-shadow: 8px 8px 25px rgba(0,0,0,0.08), inset 4px 0 20px rgba(0,0,0,0.03);
+    border-radius: 4px 15px 15px 4px; /* Simula el borde derecho del libro */
+    padding: calc(var(--book-w) * 0.12);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    
+    transform-origin: left center;
+    transition: transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
+    pointer-events: none;
 }
 
-.back {
-    transform: rotateY(180deg);
-    box-shadow: inset -4px 0 30px rgba(0,0,0,0.04), -5px 5px 20px rgba(0,0,0,0.06);
+.page.active {
+    pointer-events: auto;
+}
+
+.page.flipped {
+    /* Gira y desaparece */
+    transform: rotateY(-180deg);
 }
 
 /* --- ESTÉTICA FLUIDA --- */
@@ -127,7 +88,7 @@ html, body {
 
 .cover-title {
     font-family: 'Playfair Display', serif;
-    font-size: calc(2.1rem * var(--font-factor));
+    font-size: calc(2rem * var(--font-factor));
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -144,7 +105,7 @@ html, body {
 
 .cover-date {
     font-family: 'Playfair Display', serif;
-    font-size: calc(0.9rem * var(--font-factor));
+    font-size: calc(0.85rem * var(--font-factor));
     text-transform: uppercase;
     letter-spacing: 3px;
     color: #666666;
@@ -152,7 +113,7 @@ html, body {
 
 h2 {
     font-family: 'Playfair Display', serif;
-    font-size: calc(1.5rem * var(--font-factor));
+    font-size: calc(1.4rem * var(--font-factor));
     color: #111111;
     font-weight: 600;
     text-align: center;
@@ -160,7 +121,7 @@ h2 {
 
 p {
     font-family: 'Playfair Display', serif;
-    font-size: calc(0.95rem * var(--font-factor));
+    font-size: calc(0.9rem * var(--font-factor));
     color: #444444;
     line-height: 1.6;
     text-align: center;
@@ -177,19 +138,20 @@ p {
     color: #888;
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: calc(0.9rem * var(--font-factor));
+    font-size: calc(0.8rem * var(--font-factor));
 }
 
 button {
     background-color: #111111;
     color: #ffffff;
     border: none;
-    padding: calc(10px * var(--font-factor)) calc(20px * var(--font-factor));
+    padding: calc(12px * var(--font-factor)) calc(22px * var(--font-factor));
     font-family: 'Playfair Display', serif;
-    font-size: calc(0.85rem * var(--font-factor));
+    font-size: calc(0.8rem * var(--font-factor));
     letter-spacing: 1px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
+    margin-top: 10px;
 }
 
 button:hover { background-color: #333333; }
@@ -199,12 +161,12 @@ button:hover { background-color: #333333; }
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    margin: 10px 0;
+    gap: 12px;
+    margin: 15px 0;
 }
 
 .quiz-options button {
-    width: 90%;
+    width: 100%;
     background-color: transparent;
     color: #111111;
     border: 1px solid #111111;
