@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para ti ✨</title>
+    <!-- Fuentes premium desde Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="book-container">
+        <div class="book">
+            
+            <!-- PÁGINA 1: PORTADA ELEGANTE -->
+            <div class="page active" id="p1">
+                <div class="front">
+                    <div class="cover-content">
+                        <div class="cover-script">Felices</div>
+                        <div class="cover-title">6 Meses<br>Más</div>
+                        <div class="cover-divider"></div>
+                        <div class="cover-date">A tu lado, Miriam</div>
+                        <button onclick="nextPage(1)">Abrir Libro</button>
+                    </div>
+                </div>
+                <div class="back">
+                    <h2>Un ratito más...</h2>
+                    <p>Quería hacer algo especial para agradecerte por estos últimos 6 meses. Han estado llenos de aventuras, risas y mucho amor.</p>
+                    <button onclick="nextPage(2)">Siguiente página 👉</button>
+                </div>
+            </div>
+
+            <!-- PÁGINA 2: RECUERDOS (FOTO Y TEXTO) -->
+            <div class="page" id="p2">
+                <div class="front">
+                    <h2>Nuestra Magia</h2>
+                    <div class="photo-placeholder">[ Aquí va tu foto favorita de estos 6 meses 📸 ]</div>
+                    <p>Gracias por ser mi paz, mi motivación y la mejor compañera que la vida me pudo dar en todo este tiempo.</p>
+                    <button onclick="nextPage(2)">Siguiente página 👉</button>
+                </div>
+                <div class="back">
+                    <h2>Un recordatorio 🤫</h2>
+                    <p>Ya son más de 5 años compartiendo juntos, y te juro que cada etapa a tu lado se siente mil veces mejor que la anterior. Eres increíble.</p>
+                    <button onclick="nextPage(3)">Siguiente página 👉</button>
+                </div>
+            </div>
+
+            <!-- PÁGINA 3: CUESTIONARIO Y GRAN PREGUNTA -->
+            <div class="page" id="p3">
+                <div class="front">
+                    <h2>Para festejarlo... 🧐</h2>
+                    <p>¿Qué se te antoja más para celebrar que me sigues aguantando?</p>
+                    
+                    <div class="quiz-options">
+                        <button class="quiz-btn">Unas burgers en Humo 🍔</button>
+                        <button class="quiz-btn">Un cafecito en Bandha ☕</button>
+                    </div>
+                    
+                    <button onclick="nextPage(3)">Siguiente página 👉</button>
+                </div>
+                <div class="back">
+                    <h2>La Gran Pregunta...</h2>
+                    <p>¿Me concedes el honor de seguir siendo tu compañero de vida por muchísimos meses (y años) más? 🌹</p>
+                    
+                    <div class="btn-group">
+                        <button id="btn-si" onclick="aceptarInvitacion()">¡SÍ! ❤️</button>
+                        <!-- Aquí va la magia para PC (mouseover) y Celular (touchstart) -->
+                        <button id="btn-no" onmouseover="moverBotonNo(event)" ontouchstart="moverBotonNo(event)">No 💔</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
