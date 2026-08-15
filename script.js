@@ -35,6 +35,42 @@ function moverBotonNo(e) {
     btnNo.style.transform = `translate(${x}px, ${y}px)`;
 }
 
+// Función exclusiva para la página de la encuesta
+function validarYEnviar(numeroPaginaActual) {
+    // 1. Buscamos si hay un botón de comida/lugar seleccionado
+    const opcionSeleccionada = document.querySelector('.quiz-btn.selected');
+    
+    // 2. EL CADENERO: Si no hay nada seleccionado, lanzamos alerta y lo frenamos
+    if (!opcionSeleccionada) {
+        alert("Tienes que elegir algo corazón c:");
+        return; // Esta es la magia. El 'return' mata la función aquí mismo y no deja que avance la página.
+    }
+
+    // 3. Si pasa el filtro, sacamos el texto de su elección
+    const eleccionTexto = opcionSeleccionada.innerText.trim();
+
+    // 4. Cambiamos de página usando tu función original
+    nextPage(numeroPaginaActual);
+
+    // 5. Mandamos el mensaje a Discord con lo que eligió
+    // (Pega aquí la URL de tu Webhook que ya te funcionó)
+    const webhookUrl = "PEGAR_AQUI_TU_URL_DE_DISCORD";
+    
+    const payload = {
+        content: `🚨 **¡ALERTA ROMÁNTICA!** 🚨\n¡Miriam acaba de elegir el festejo! 🎉\n\n🍽️ **Se le antojó:** ${eleccionTexto}\n\n¡Ve preparando la salida!`
+    };
+
+    fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(() => console.log("¡Pitazo enviado!"))
+    .catch(error => console.error("Error:", error));
+}
+
 function prevPage(targetPage) {
     // La página a la que queremos regresar (la que está volteada)
     const pageToReveal = document.getElementById(`p${targetPage}`);
