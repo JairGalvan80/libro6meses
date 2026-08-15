@@ -279,11 +279,17 @@ button:hover {
         width: 35px !important; /* Hacemos el moño un pelito más chico */
         margin-bottom: 5px !important;
     }
-    /* --- EFECTO DE LIBRO SALIENDO DE LA PANTALLA --- */
+    /* --- EFECTO DE LIBRO SALIENDO DE LA PANTALLA (SOLO CUANDO SE ABRE) --- */
+    
+    /* Le damos un movimiento suave al contenedor general */
     .book-container {
-        position: relative !important;
-        transform: translateX(-6vw) !important; /* Empuja el libro hacia el borde izquierdo */
-        width: 95vw !important; /* Lo ensanchamos un poquito para equilibrar el lado derecho */
+        transition: transform 0.6s ease-in-out, width 0.6s ease-in-out !important;
+    }
+
+    /* La magia: Si la página 1 (portada) ya se volteó, entonces recorremos el libro a la izquierda */
+    .book-container:has(#p1.flipped) {
+        transform: translateX(-6vw) !important; 
+        width: 95vw !important; 
     }
 }
 /* --- ARREGLO DEFINITIVO PARA LA FLECHA DE REGRESO --- */
