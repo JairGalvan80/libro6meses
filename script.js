@@ -1,144 +1,70 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para ti ✨</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+function nextPage(pageNumber) {
+    const currentPage = document.getElementById(`p${pageNumber}`);
+    currentPage.classList.add('flipped');
+    currentPage.classList.remove('active');
+    
+    const nextPage = document.getElementById(`p${pageNumber + 1}`);
+    if (nextPage) {
+        nextPage.classList.add('active');
+    }
+}
 
-    <div class="book-container">
-        
-        <!-- PÁGINA 1: PORTADA -->
-        <div class="page active" id="p1" style="z-index: 12;">
-            <div class="cover-content">
-                <img src="https://i.pinimg.com/originals/f5/95/a0/f595a0b3bfe0ef8002cf39fbdce07b78.gif" class="kitty-deco" alt="Moño Kitty">
-                <div class="cover-script">Felices</div>
-                <div class="cover-title">6 Meses<br>De novios</div>
-                <div class="cover-divider"></div>
-                <div class="cover-date">6 meses más a<br>tu lado, Miriam</div>
-                <br>
-                <button onclick="nextPage(1)">Leer libro</button>
-            </div>
-        </div>
+function moverBotonNo(e) {
+    if (e) {
+        e.preventDefault(); 
+    }
+    
+    const btnNo = document.getElementById('btn-no');
+    
+    // Rango de salto (más amplio para que sea más difícil atraparlo)
+    const isMobile = window.innerWidth <= 600;
+    const maxRangoX = isMobile ? 80 : 130;
+    const maxRangoY = isMobile ? 100 : 150;
+    
+    let x = (Math.random() - 0.5) * maxRangoX * 2;
+    let y = (Math.random() - 0.5) * maxRangoY * 2;
+    
+    // LA MAGIA ANTI-TRAMPAS (Zona prohibida)
+    // Como el botón "SÍ" está arriba del "NO", la zona prohibida de choque es hacia arriba (negativa).
+    // Si la 'y' calculada cae entre -90 y 10 pixeles, chocaría con el SÍ.
+    if (y > -90 && y < 10) {
+        // Lo pateamos hacia abajo obligatoriamente
+        y = Math.random() * 60 + 30; 
+    }
+    
+    btnNo.style.transform = `translate(${x}px, ${y}px)`;
+}
 
-        <!-- PÁGINA 2: INTRODUCCIÓN -->
-        <div class="page" id="p2" style="z-index: 11;">
-            <button class="back-btn" onclick="prevPage(1)">&#8592;</button>
-            <h2>Un ratito más...</h2>
-            <p>Quería hacer algo especial para agradecerte y celebrar estos 6 meses que hemos pasado, quiero agradecerte por tantas risas, por muchos momentos bonitos a tu lado y por siempre llenar mi corazón con esos ojos preciosos.</p>
-            <img src="https://media.tenor.com/bxAzxSFXW68AAAAj/cute-hello-kitty.gif" class="kitty-gif" alt="Kitty Abrazo">
-            <button onclick="nextPage(2)">Siguiente página</button>
-        </div>
+function prevPage(targetPage) {
+    // La página a la que queremos regresar (la que está volteada)
+    const pageToReveal = document.getElementById(`p${targetPage}`);
+    // La página en la que estamos ahorita
+    const currentPage = document.getElementById(`p${targetPage + 1}`);
 
-        <!-- PÁGINA 3: FOTO 1 -->
-        <div class="page" id="p3" style="z-index: 10;">
-            <button class="back-btn" onclick="prevPage(2)">&#8592;</button>
-            <h2>Nuestra Magia</h2>
-            <img src="imgs/imagen (1).jpg" class="album-photo" alt="Nuestra foto">
-            <p>Gracias por ser la persona mas maravillosa del mundo, por ser divina, bonita, inteligente y una gran inspiración para siempre seguir adelante y no veo mejor forma de hacerlo que a tú lado.</p>
-            <button onclick="nextPage(3)">Siguiente página</button>
-        </div>
+    if (pageToReveal) {
+        // Le quitamos la clase 'flipped' para que la hoja regrese a la derecha
+        pageToReveal.classList.remove('flipped');
+        pageToReveal.classList.add('active');
+    }
+    
+    if (currentPage) {
+        // Desactivamos la hoja actual
+        currentPage.classList.remove('active');
+    }
+}
 
-        <!-- PÁGINA 4: FOTO 2 -->
-        <div class="page" id="p4" style="z-index: 9;">
-            <button class="back-btn" onclick="prevPage(3)">&#8592;</button>
-            <h2>Mil aventuras</h2>
-            <img src="imgs/imagen (2).jpg" class="album-photo" alt="Nuestra foto">
-            <p>Haces que el tiempo se vaya como agua, ojalá pudiera detenerlo y vivir un poco más cada momento a tu lado, momentos tan únicos con esos ojos cafés donde puedo encontrar siempre una razón extra para amar compartir un café a tu lado. Amo el café, pero más el tono dulce que forma en tus ojos.</p>
-            <button onclick="nextPage(4)">Siguiente página</button>
-        </div>
+// Función para seleccionar la opción del cuestionario
+function selectOption(botonClickeado) {
+    // Buscamos todos los botones que tengan la clase 'quiz-btn'
+    const botones = document.querySelectorAll('.quiz-btn');
+    
+    // Le quitamos la clase 'selected' a todos para resetearlos
+    botones.forEach(boton => boton.classList.remove('selected'));
+    
+    // Le ponemos la clase 'selected' únicamente al botón que tocó
+    botonClickeado.classList.add('selected');
+}
 
-        <!-- PÁGINA 5: FOTO 3 -->
-        <div class="page" id="p5" style="z-index: 8;">
-            <button class="back-btn" onclick="prevPage(4)">&#8592;</button>
-            <h2>Un hogar</h2>
-            <img src="imgs/imagen (3).jpg" class="album-photo" alt="Nuestra foto">
-            <p>Los lugares que pisas los vuelves tuyos y los inundas de una calidez extrema, donde sea que estes parada vas a llevar una parte de mi contigo.
-            Me siento incompleto si no me encuentro a tu lado y tengo muy claro como se siente un hogar gracias a ti, a tu calidez y a tu amor, gracias por siempre ser mi hogar.
-            </p>
-            <button onclick="nextPage(5)">Siguiente página</button>
-        </div>
-
-        <!-- PÁGINA 6: FOTO 4 -->
-        <div class="page" id="p6" style="z-index: 7;">
-            <button class="back-btn" onclick="prevPage(5)">&#8592;</button>
-            <h2>Mi lugar seguro</h2>
-            <img src="imgs/imagen (4).jpg" class="album-photo" alt="Nuestra foto">
-            <p>Haces que cada parte mía se sienta en su lugar, desde el niño interior hasta el adulto en formación, tienes en tus manos cada parte de mi y te las entrego con todo el calor de mi corazón porque se con firmeza que no podría haber elegido a una mejor persona para entregárselas.</p>
-            <button onclick="nextPage(6)">Siguiente página</button>
-        </div>
-
-        <!-- PÁGINA 7: FOTO 5 (NUEVA) -->
-        <div class="page" id="p7" style="z-index: 6;">
-            <button class="back-btn" onclick="prevPage(6)">&#8592;</button>
-            <h2>Cada detalle</h2>
-            <img src="imgs/imagen (5).jpg" class="album-photo" alt="Nuestra foto">
-            <p>Amo cada detalle de ti y me siento muy orgulloso de poder gritar y celebrar contigo cada que uno nuevo se añada a la mujer tan extraordinaria que eres. Me siento tan feliz de verte avanzar y poder caminar ese camino tomado de tu manita cálida.<br>Te amo Miriam.</p>
-            <button onclick="nextPage(7)">Siguiente página</button>
-        </div>
-
-        <!-- PÁGINA 8: FOTO 6 (NUEVA) -->
-        <div class="page" id="p8" style="z-index: 5;">
-            <button class="back-btn" onclick="prevPage(7)">&#8592;</button>
-            <h2>Y lo que falta...</h2>
-            <img src="imgs/imagen (6).jpg" class="album-photo" alt="Nuestra foto">
-            <p>Todo este tiempo ha sido increíble a tu lado y no da la imaginación para describir lo que puede sentirse un futuro a tu lado. <br> </p>
-            <button onclick="nextPage(8)">Siguiente página</button>
-        </div>
-
-        <!-- PÁGINA 9: TEXTO EMOTIVO -->
-        <div class="page" id="p9" style="z-index: 4;">
-            <button class="back-btn" onclick="prevPage(8)">&#8592;</button>
-            <h2>Un recordatorio</h2>
-            <p>Ya son bastantes meses compartiendo juntos, y te juro que cada respiro a tu lado se siente mil veces mejor que el anterior. Eres increíble.</p>
-            <img src="https://i.pinimg.com/originals/5b/e2/83/5be28314a6ac39cdc7a6f5308bb560b9.gif" class="kitty-gif" alt="Kitty Amor">
-            <button onclick="nextPage(9)">Siguiente página</button>
-        </div>
-
-        <!-- PÁGINA 10: EL CUESTIONARIO -->
-        <div class="page" id="p10" style="z-index: 3;">
-            <button class="back-btn" onclick="prevPage(9)">&#8592;</button>
-            <h2>Para festejarlo... ❤️</h2>
-            <p>¿Qué se te antoja más para celebrar que estoy loco por ti?</p>
-            <div class="quiz-options">
-                <!-- Se le agregó la función onclick a cada uno -->
-                <button class="quiz-btn" onclick="selectOption(this)">Unas burgers en Humo 🍔</button>
-                <button class="quiz-btn" onclick="selectOption(this)">Un cafecito en Bandha ☕</button>
-                <button class="quiz-btn" onclick="selectOption(this)">Se aceptan sugerencias por caso especial de enfermedad o calor 🥵</button>
-            </div>
-            <button onclick="nextPage(10)">Siguiente página</button>
-        </div>
-
-        <!-- PÁGINA 11: LA GRAN PREGUNTA -->
-        <div class="page" id="p11" style="z-index: 2;">
-            <button class="back-btn" onclick="prevPage(10)">&#8592;</button>
-            <h2>La Gran Pregunta...</h2>
-            <p>¿Me concedes el honor de seguir siendo tu compañero de vida por muchísimos meses (y años) más? 🌹</p>
-            <img src="https://i.pinimg.com/originals/42/ce/f9/42cef905d9f1c800a9445c254d158d89.gif" class="kitty-gif" alt="Kitty Pregunta">
-            <div class="btn-group">
-                <button id="btn-si" onclick="nextPage(11)">¡SÍ! ❤️</button>
-                <button id="btn-no" onmouseover="moverBotonNo(event)" ontouchstart="moverBotonNo(event)">No 💔</button>
-            </div>
-        </div>
-
-        <!-- PÁGINA 12: CIERRE FINAL -->
-        <div class="page" id="p12" style="z-index: 1;">
-            <button class="back-btn" onclick="prevPage(11)">&#8592;</button>
-            
-            <h2>Hoy será un gran día, así como todos los que hemos pasado juntos.</h2>
-            <p>Sabía que dirías que siii!<br> No se podia poner q no jsjsjs</p>
-            <img src="https://i.makeagif.com/media/9-20-2021/1SeWtE.gif" class="kitty-gif" alt="Kitty Celebrando">
-            <p>Te amo<br>-Jair</p>
-            
-        </div>
-
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+function aceptarInvitacion() {
+    alert('¡SIII! Sabía que dirías que sí. ¡Te amo muchísimo! ❤️🌹');
+}
