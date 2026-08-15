@@ -280,3 +280,21 @@ button:hover {
         margin-bottom: 5px !important;
     }
 }
+/* --- ARREGLO DEFINITIVO PARA LA FLECHA DE REGRESO --- */
+.back-btn {
+    position: absolute !important; /* La despegamos del texto */
+    top: 15px !important; /* La anclamos arriba */
+    left: 15px !important; /* La anclamos a la izquierda */
+    font-size: 1.5rem !important; /* Tamaño fijo y grandecito */
+    background: transparent !important;
+    border: none !important;
+    color: #111111 !important;
+    padding: 5px 10px !important;
+    cursor: pointer !important;
+    z-index: 20 !important; /* Para que siempre se pueda picar */
+}
+
+/* Le damos un empujoncito hacia abajo a los títulos para que no choquen con la flecha */
+.page h2 {
+    margin-top: 35px !important;
+}
