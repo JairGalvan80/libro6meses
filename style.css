@@ -318,3 +318,17 @@ button:hover {
 .page h2 {
     margin-top: 35px !important;
 }
+
+/* --- ELIMINAR EL DOBLEZ/LOMO GRIS DE LA PORTADA --- */
+#p1 {
+    /* Forzamos el fondo a blanco puro y matamos el degradado gris */
+    background-color: #ffffff !important;
+    background-image: none !important; 
+}
+
+/* Si el lomo gris está hecho con un pseudo-elemento, lo desaparecemos */
+#p1::before, 
+#p1::after {
+    display: none !important;
+    opacity: 0 !important;
+}
