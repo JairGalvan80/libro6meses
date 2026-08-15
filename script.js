@@ -65,6 +65,50 @@ function selectOption(botonClickeado) {
     botonClickeado.classList.add('selected');
 }
 
+// Función para el botón SÍ (Valida, avanza y manda alerta a Discord)
 function aceptarInvitacion() {
-    alert('¡SIII! Sabía que dirías que sí. ¡Te amo muchísimo! ❤️🌹');
+    // 1. Verificamos si ya seleccionó una opción
+    const opcionSeleccionada = document.querySelector('.quiz-btn.selected');
+    
+    if (!opcionSeleccionada) {
+        // Si no ha elegido nada, le lanzamos una alerta tierna y detenemos la función
+        alert("Tienes que elegir algo corazón c:");
+        return; // Esto evita que cambie de página o mande la notificación
+    }
+
+    // Si ya eligió algo, sacamos el texto de su elección
+    const eleccionTexto = opcionSeleccionada.innerText.trim();
+
+    // 2. Hacemos la animación a la última página (p12)
+    const currentPage = document.getElementById('p11');
+    currentPage.classList.add('flipped');
+    currentPage.classList.remove('active');
+    
+    const nextPage = document.getElementById('p12');
+    if (nextPage) {
+        nextPage.classList.add('active');
+    }
+
+    // 3. Pegas aquí la URL mágica de tu Webhook
+    const webhookUrl = "https://discord.com/api/webhooks/1538108487039713372/38lO3Y4s0f0v9qqv56pfhXObETKRcguJqhR7Kh0Sl6GkHiJwAY_eshVD0DXE2we_aUFt";
+    
+    // 4. Armamos el reporte completo para Discord con su elección
+    const payload = {
+        content: `🚨 **¡ALERTA ROMÁNTICA!** 🚨\n¡Miriam acaba de decir que SÍ en el libro! 🎉\n\n🍽️ **Su elección para festejar:** ${eleccionTexto}\n\n¡Ve preparando la salida!`
+    };
+
+    // 5. El envío silencioso
+    fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(() => {
+        console.log("Notificación enviada con éxito, el novio ha sido alertado 😎");
+    })
+    .catch(error => {
+        console.error("Error al enviar la notificación:", error);
+    });
 }
