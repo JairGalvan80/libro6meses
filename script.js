@@ -65,7 +65,7 @@ function selectOption(botonClickeado) {
     botonClickeado.classList.add('selected');
 }
 
-// Función para el botón SÍ (Valida, avanza y manda alerta a Discord)
+// Función para el btón SÍ (Valida, avanza y manda alerta a Discord)
 function aceptarInvitacion() {
     // 1. Verificamos si ya seleccionó una opción
     const opcionSeleccionada = document.querySelector('.quiz-btn.selected');
