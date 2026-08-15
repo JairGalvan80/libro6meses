@@ -219,3 +219,40 @@ button:hover {
     font-size: calc(0.78rem * var(--font-factor)); /* Baja de 0.9 a 0.78 */
     line-height: 1.4; /* Apretamos un pelito el interlineado para que se vea más elegante */
 }
+
+/* --- RESCATE DE ESPACIO PARA PANTALLAS DE CELULAR --- */
+@media (max-width: 600px) {
+    /* Títulos más compactos */
+    h2 {
+        font-size: 1.4rem !important; 
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
+    }
+
+    /* Párrafos más pequeños y pegaditos */
+    p {
+        font-size: 0.85rem !important; 
+        line-height: 1.3 !important; 
+        margin-bottom: 8px !important;
+    }
+
+    /* Reducimos un poquito la altura de las fotos para dar más aire al texto */
+    .album-photo {
+        height: 35% !important;
+        margin: 10px 0 !important;
+    }
+
+    /* Ajuste para que los 3 botones del cuestionario no se salgan de la página */
+    .quiz-btn {
+        padding: 10px !important;
+        font-size: 0.85rem !important;
+        margin: 5px 0 !important;
+    }
+
+    /* Hacemos que el botón negro de "Siguiente página" ocupe menos bulto */
+    .page > button:last-of-type {
+        margin-top: 5px !important;
+        padding: 8px 15px !important;
+        font-size: 0.9rem !important;
+    }
+}
