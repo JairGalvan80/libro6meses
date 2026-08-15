@@ -279,14 +279,22 @@ button:hover {
         width: 35px !important; /* Hacemos el moño un pelito más chico */
         margin-bottom: 5px !important;
     }
-    /* --- EFECTO DE LIBRO SALIENDO DE LA PANTALLA (SOLO CUANDO SE ABRE) --- */
+    /* --- EFECTO DE APERTURA PREMIUM Y OCULTAMIENTO DE HOJAS --- */
     
-    /* Le damos un movimiento suave al contenedor general */
     .book-container {
+        /* Mantenemos la transición suave del movimiento hacia la izquierda */
         transition: transform 0.6s ease-in-out, width 0.6s ease-in-out !important;
     }
 
-    /* La magia: Si la página 1 (portada) ya se volteó, entonces recorremos el libro a la izquierda */
+    /* MAGIA: Si la portada está cerrada, ocultamos por completo el resto del libro
+       para que no se asome ni un solo milímetro de hoja blanca a la izquierda */
+    .book-container:not(:has(#p1.flipped)) .page:not(#p1) {
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    /* Cuando le pica a "Leer libro" (se voltea la p1), el libro se mueve a la izquierda
+       y las hojas de abajo recuperan su visibilidad automáticamente */
     .book-container:has(#p1.flipped) {
         transform: translateX(-6vw) !important; 
         width: 95vw !important; 
