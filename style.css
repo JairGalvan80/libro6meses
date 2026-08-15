@@ -279,6 +279,12 @@ button:hover {
         width: 35px !important; /* Hacemos el moño un pelito más chico */
         margin-bottom: 5px !important;
     }
+    /* --- EFECTO DE LIBRO SALIENDO DE LA PANTALLA --- */
+    .book-container {
+        position: relative !important;
+        transform: translateX(-6vw) !important; /* Empuja el libro hacia el borde izquierdo */
+        width: 95vw !important; /* Lo ensanchamos un poquito para equilibrar el lado derecho */
+    }
 }
 /* --- ARREGLO DEFINITIVO PARA LA FLECHA DE REGRESO --- */
 .back-btn {
